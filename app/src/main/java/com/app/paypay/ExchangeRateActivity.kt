@@ -16,11 +16,17 @@ class ExchangeRateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exchange_rate)
         DI.start(this)
+        render()
 
 
 
-        viewModel.let {
-            it.getViewState().observe(this) { viewState ->
+
+
+    }
+
+    private fun render() {
+
+        viewModel.getViewState().observe(this) { viewState ->
                 when (viewState) {
                     is ExchangeRateViewState.Loading -> {
                         Toast.makeText(this, "Loading ${viewState.isLoading}", Toast.LENGTH_SHORT)
@@ -43,8 +49,8 @@ class ExchangeRateActivity : AppCompatActivity() {
                     }
                 }
             }
-            it.getExchangeRates("USD")
-        }
 
+
+        }
     }
 }
