@@ -14,8 +14,7 @@ class CurrencyLayerServiceRepository(
         return withContext(Dispatchers.IO) {
             try {
                 val response = remoteSource.getLiveExchangeRates(sourceCurrency)
-                val quotes = response.quotes.values.toList()
-                when (localSource.addExchangeRates(sourceCurrency, quotes)) {
+                when (localSource.addExchangeRates(sourceCurrency, response.quotes)) {
                     true -> Payload.Success(
                         localSource.getExchangeRatesForSourceCurrency(
                             sourceCurrency
