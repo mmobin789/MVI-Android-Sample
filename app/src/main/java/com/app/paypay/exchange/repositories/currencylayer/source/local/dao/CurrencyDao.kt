@@ -1,0 +1,12 @@
+package com.app.paypay.exchange.repositories.currencylayer.source.local.dao
+
+import androidx.room.Dao
+import androidx.room.Query
+import com.app.paypay.base.dao.BaseDao
+import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+
+@Dao
+interface CurrencyDao : BaseDao<ExchangeRate> {
+    @Query("SELECT * FROM exchange_rate where sourceCurrency = :sourceCurrency")
+    fun getExchangeRatesForSourceCurrency(sourceCurrency: String): List<ExchangeRate>
+}
