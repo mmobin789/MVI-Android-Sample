@@ -6,5 +6,5 @@ data class CurrencyLayerResponse(
     val startDate: String,
     val endDate: String,
     val source: String,
-    val quotes: LinkedHashMap<String, Double>
+    val quotes: LinkedHashMap<String, Double>?
 )

@@ -5,10 +5,12 @@ import androidx.room.Room
 import com.app.paypay.database.AppDatabase
 import com.app.paypay.exchange.network.NetworkConfig
 import com.app.paypay.exchange.repositories.currencylayer.CurrencyLayerServiceRepository
+import com.app.paypay.exchange.repositories.currencylayer.source.app.AssetSource
 import com.app.paypay.exchange.repositories.currencylayer.source.local.LocalSource
 import com.app.paypay.exchange.repositories.currencylayer.source.remote.RemoteSource
 import com.app.paypay.exchange.usecases.CachedCurrenciesUseCase
 import com.app.paypay.exchange.usecases.CurrencyServiceUseCase
+import com.app.paypay.exchange.usecases.GetCurrenciesViaAssetsUseCase
 import com.app.paypay.exchange.vm.ExchangeActivityViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -43,10 +45,12 @@ object DI {
             single { Room.databaseBuilder(get(), AppDatabase::class.java, "appDB").build() }
             factory { RemoteSource(get()) }
             factory { LocalSource(get<AppDatabase>().currencyDao()) }
-            factory { CurrencyLayerServiceRepository(get(), get()) }
+            factory { AssetSource(androidContext()) }
+            factory { CurrencyLayerServiceRepository(get(), get(), get()) }
             single { CurrencyServiceUseCase(get()) }
             single { CachedCurrenciesUseCase(get()) }
-            viewModel { ExchangeActivityViewModel(get(),get()) }
+            single { GetCurrenciesViaAssetsUseCase(get()) }
+            viewModel { ExchangeActivityViewModel(get(), get(), get()) }
         }
 
 
