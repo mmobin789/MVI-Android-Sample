@@ -1,6 +1,7 @@
 package com.app.paypay.utils
 
 import android.content.Context
+import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -30,3 +31,5 @@ fun Context.loadCurrenciesFromAssets(): List<String> {
 
     return emptyList()
 }
+
+fun ExchangeRate.getConvertedAmount(sourceAmount: Double) = "${sourceAmount * exchangeRate}"

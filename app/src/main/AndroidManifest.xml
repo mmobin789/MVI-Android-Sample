@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PayPay"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ExchangeRateActivity"
+            android:name=".ui.ExchangeRateActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

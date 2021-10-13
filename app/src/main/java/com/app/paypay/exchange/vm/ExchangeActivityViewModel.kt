@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.paypay.R
 import com.app.paypay.exchange.repositories.currencylayer.CurrencyLayerServiceRepository
 import com.app.paypay.exchange.usecases.CachedCurrenciesUseCase
 import com.app.paypay.exchange.usecases.CurrencyServiceUseCase
@@ -22,16 +23,33 @@ class ExchangeActivityViewModel(
         return viewState
     }
 
-    fun getExchangeRates(sourceCurrency: String) {
+    fun getExchangeRates(sourceCurrency: String, sourceAmount: String) {
         viewModelScope.launch {
+            if (sourceCurrency.isBlank()) {
+                viewState.value = ExchangeRateViewState.GenericError(R.string.enter_currency_msg)
+                return@launch
+            }
+
+            if (sourceAmount.isBlank()) {
+                viewState.value = ExchangeRateViewState.GenericError(R.string.enter_amount_msg)
+                return@launch
+            }
+
             startLoading()
+
+            val baseAmount = sourceAmount.toDouble()
+
             viewState.value = when (val result = cachedCurrenciesUseCase(sourceCurrency)) {
                 is CurrencyLayerServiceRepository.Payload.ExchangeRates.Success -> {
                     stopLoading()
-                    ExchangeRateViewState.ExchangeRates(result.exchangeRates)
+                    ExchangeRateViewState.ExchangeRates(
+                        sourceAmount = baseAmount,
+                        result.exchangeRates
+                    )
                 }
                 is CurrencyLayerServiceRepository.Payload.ExchangeRates.Fail -> runCurrencyServiceUseCase(
-                    sourceCurrency
+                    sourceCurrency,
+                    sourceAmount = baseAmount
                 )
                 else -> throw NotImplementedError()
             }
@@ -43,7 +61,7 @@ class ExchangeActivityViewModel(
     fun getCurrenciesFromAssets() {
         viewModelScope.launch {
             startLoading()
-           viewState.value =  when (val result = getCurrenciesViaAssetsUseCase()) {
+            viewState.value = when (val result = getCurrenciesViaAssetsUseCase()) {
                 is CurrencyLayerServiceRepository.Payload.CurrencyInfoViaAssets.Fail -> {
                     stopLoading()
                     ExchangeRateViewState.Error(result.error)
@@ -52,8 +70,8 @@ class ExchangeActivityViewModel(
                     stopLoading()
                     ExchangeRateViewState.CurrenciesFromAssets(result.currencies)
                 }
-               else -> throw NotImplementedError()
-           }
+                else -> throw NotImplementedError()
+            }
         }
     }
 
@@ -65,11 +83,14 @@ class ExchangeActivityViewModel(
         viewState.value = ExchangeRateViewState.Loading(isLoading = true)
     }
 
-    private suspend fun runCurrencyServiceUseCase(sourceCurrency: String): ExchangeRateViewState {
+    private suspend fun runCurrencyServiceUseCase(
+        sourceCurrency: String,
+        sourceAmount: Double
+    ): ExchangeRateViewState {
         return when (val result = currencyServiceUseCase(sourceCurrency)) {
             is CurrencyLayerServiceRepository.Payload.ExchangeRates.Success -> {
                 stopLoading()
-                ExchangeRateViewState.ExchangeRates(result.exchangeRates)
+                ExchangeRateViewState.ExchangeRates(sourceAmount, result.exchangeRates)
             }
             is CurrencyLayerServiceRepository.Payload.ExchangeRates.Fail -> {
                 stopLoading()

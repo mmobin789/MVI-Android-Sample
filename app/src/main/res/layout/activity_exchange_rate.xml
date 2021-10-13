@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExchangeRateActivity">
+    tools:context=".ui.ExchangeRateActivity">
 
     <EditText
         android:id="@+id/et_amount"
@@ -39,15 +39,19 @@
         tools:text="YYY" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_currencies"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border_et_amount"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/et_amount"
         app:layout_constraintStart_toStartOf="@id/et_amount"
-        app:layout_constraintTop_toBottomOf="@id/tv_currency" />
+        app:layout_constraintTop_toBottomOf="@id/tv_currency"
+        tools:itemCount="10"
+        tools:listitem="@layout/adapter_currencies" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

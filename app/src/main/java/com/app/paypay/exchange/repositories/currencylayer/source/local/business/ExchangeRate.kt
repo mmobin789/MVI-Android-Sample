@@ -9,6 +9,5 @@ data class ExchangeRate(
     val destinationCurrency: String,
     val exchangeRate: Double,
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-  //  val convertedValue
+    val id: Long = 0
 )
