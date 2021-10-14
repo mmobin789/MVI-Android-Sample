@@ -7,7 +7,7 @@ import com.app.paypay.databinding.AdapterCurrenciesBinding
 import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
 import com.app.paypay.utils.getConvertedAmount
 
-class CurrenciesAdapter(private val sourceAmount: Double, private val list: List<ExchangeRate>) :
+class CurrenciesAdapter(private val list: List<ExchangeRate>) :
     RecyclerView.Adapter<CurrenciesAdapter.ViewHolder>() {
 
 
@@ -21,7 +21,7 @@ class CurrenciesAdapter(private val sourceAmount: Double, private val list: List
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.run {
             val exchangeRate = list[position]
-            tvAmount.text = exchangeRate.getConvertedAmount(sourceAmount)
+            tvAmount.text = exchangeRate.getConvertedAmount()
             tvCurrency.text = exchangeRate.destinationCurrency
         }
     }

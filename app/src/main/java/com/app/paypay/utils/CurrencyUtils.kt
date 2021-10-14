@@ -32,4 +32,4 @@ fun Context.loadCurrenciesFromAssets(): List<String> {
     return emptyList()
 }
 
-fun ExchangeRate.getConvertedAmount(sourceAmount: Double) = "${sourceAmount * exchangeRate}"
+fun ExchangeRate.getConvertedAmount() = "${sourceAmount * exchangeRate}"

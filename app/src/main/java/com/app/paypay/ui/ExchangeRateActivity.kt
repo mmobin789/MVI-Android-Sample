@@ -69,7 +69,7 @@ class ExchangeRateActivity : AppCompatActivity() {
                     }
                     is ExchangeRateViewState.ExchangeRates -> {
                         binding.rvCurrencies.adapter =
-                            CurrenciesAdapter(viewState.sourceAmount, viewState.exchangeRates)
+                            CurrenciesAdapter(viewState.exchangeRates)
                     }
                     is ExchangeRateViewState.CurrenciesFromAssets -> {
                         createCurrencyMenu(viewState.currencies)
