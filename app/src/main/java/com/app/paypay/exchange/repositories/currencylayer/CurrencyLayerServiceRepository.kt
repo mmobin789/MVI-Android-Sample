@@ -6,28 +6,39 @@ import com.app.paypay.exchange.repositories.currencylayer.source.local.business.
 import com.app.paypay.exchange.repositories.currencylayer.source.remote.RemoteSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
 
 class CurrencyLayerServiceRepository(
     private val remoteSource: RemoteSource,
     private val localSource: LocalSource,
     private val assetSource: AssetSource
 ) {
-    suspend fun getLiveExchangeRates(sourceCurrency: String): Payload {
+    suspend fun getLiveExchangeRates(sourceCurrency: String, sourceAmount: Double): Payload {
         return withContext(Dispatchers.IO) {
             try {
                 val response = remoteSource.getLiveExchangeRates(sourceCurrency)
                 response.quotes?.run {
-                    when (localSource.addExchangeRates(sourceCurrency, this)) {
+                    when (localSource.addExchangeRates(sourceCurrency, sourceAmount, this)) {
                         true -> Payload.ExchangeRates.Success(
                             localSource.getExchangeRatesForSourceCurrency(
-                                sourceCurrency
+                                sourceCurrency,
+                                sourceAmount
                             )
                         )
                         else -> Payload.ExchangeRates.Fail("Failed to insert exchange rates in Database.")
                     }
                 } ?: run {
-                    //todo return a dummy rate here for calculation
-                    Payload.ExchangeRates.Fail("Failed to get exchange rates.")
+                    // returns dummy rates here for calculation as they are not available in currency layer api.
+                    val dummyExchangeRates =
+                        assetSource.getCurrenciesFromAssets().map { destinationCurrency ->
+                            ExchangeRate(
+                                sourceAmount,
+                                sourceCurrency,
+                                destinationCurrency,
+                                exchangeRate = Random.nextDouble()
+                            )
+                        }
+                    Payload.ExchangeRates.Success(dummyExchangeRates)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -36,11 +47,22 @@ class CurrencyLayerServiceRepository(
         }
     }
 
-    suspend fun getCachedExchangeRates(sourceCurrency: String): Payload {
+    suspend fun getCachedExchangeRates(sourceCurrency: String, sourceAmount: Double): Payload {
         return withContext(Dispatchers.IO) {
-            val exchangeRates = localSource.getExchangeRatesForSourceCurrency(sourceCurrency)
+            val exchangeRates =
+                localSource.getExchangeRatesForSourceCurrency(sourceCurrency, sourceAmount)
             when (exchangeRates.isNotEmpty()) {
                 true -> Payload.ExchangeRates.Success(exchangeRates)
+                else -> Payload.ExchangeRates.Fail("Exchange rates not available in database.")
+            }
+        }
+    }
+
+    suspend fun deleteCachedExchangeRates(): Payload {
+        return withContext(Dispatchers.IO) {
+            val deletedExchangeRates = localSource.deleteCachedExchangeRates()
+            when (deletedExchangeRates > 0) {
+                true -> Payload.ExchangeRates.Success(emptyList())
                 else -> Payload.ExchangeRates.Fail("Exchange rates not available in database.")
             }
         }
@@ -51,7 +73,7 @@ class CurrencyLayerServiceRepository(
             val currencies = assetSource.getCurrenciesFromAssets()
             when (currencies.isNotEmpty()) {
                 true -> Payload.CurrencyInfoViaAssets.Success(currencies)
-                else -> Payload.CurrencyInfoViaAssets.Fail("Exchange rates not available in database.")
+                else -> Payload.CurrencyInfoViaAssets.Fail("Exchange rates not available in app.")
             }
         }
     }

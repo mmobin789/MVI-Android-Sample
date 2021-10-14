@@ -39,7 +39,9 @@ class ExchangeActivityViewModel(
 
             val baseAmount = sourceAmount.toDouble()
 
-            viewState.value = when (val result = cachedCurrenciesUseCase(sourceCurrency)) {
+            viewState.value = when (val result =
+                cachedCurrenciesUseCase(sourceCurrency, sourceAmount = baseAmount)) {
+
                 is CurrencyLayerServiceRepository.Payload.ExchangeRates.Success -> {
                     stopLoading()
                     ExchangeRateViewState.ExchangeRates(
@@ -87,7 +89,7 @@ class ExchangeActivityViewModel(
         sourceCurrency: String,
         sourceAmount: Double
     ): ExchangeRateViewState {
-        return when (val result = currencyServiceUseCase(sourceCurrency)) {
+        return when (val result = currencyServiceUseCase(sourceCurrency,sourceAmount)) {
             is CurrencyLayerServiceRepository.Payload.ExchangeRates.Success -> {
                 stopLoading()
                 ExchangeRateViewState.ExchangeRates(sourceAmount, result.exchangeRates)

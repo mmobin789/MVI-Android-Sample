@@ -7,6 +7,12 @@ import com.app.paypay.exchange.repositories.currencylayer.source.local.business.
 
 @Dao
 interface CurrencyDao : BaseDao<ExchangeRate> {
-    @Query("SELECT * FROM exchange_rate where sourceCurrency = :sourceCurrency")
-    fun getExchangeRatesForSourceCurrency(sourceCurrency: String): List<ExchangeRate>
+    @Query("SELECT * FROM exchange_rate WHERE sourceCurrency = :sourceCurrency AND sourceAmount = :sourceAmount")
+    fun getExchangeRatesForSourceCurrency(
+        sourceCurrency: String,
+        sourceAmount: Double
+    ): List<ExchangeRate>
+
+    @Query("DELETE FROM exchange_rate")
+    fun deleteAll(): Int
 }

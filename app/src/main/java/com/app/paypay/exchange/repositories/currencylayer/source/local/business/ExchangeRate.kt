@@ -5,9 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "exchange_rate")
 data class ExchangeRate(
+    val sourceAmount: Double,
     val sourceCurrency: String,
     val destinationCurrency: String,
     val exchangeRate: Double,
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0
+    val id: Long = 0,
+    val timestamp: Long = System.currentTimeMillis()
 )

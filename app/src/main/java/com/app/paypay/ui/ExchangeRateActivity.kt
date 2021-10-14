@@ -1,6 +1,7 @@
 package com.app.paypay.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -63,7 +64,8 @@ class ExchangeRateActivity : AppCompatActivity() {
             it.getViewState().observe(this) { viewState ->
                 when (viewState) {
                     is ExchangeRateViewState.Loading -> {
-                        showToast("Loading ${viewState.isLoading}")
+                        binding.progressCircular.visibility = if (viewState.isLoading)
+                            View.VISIBLE else View.GONE
                     }
                     is ExchangeRateViewState.ExchangeRates -> {
                         binding.rvCurrencies.adapter =

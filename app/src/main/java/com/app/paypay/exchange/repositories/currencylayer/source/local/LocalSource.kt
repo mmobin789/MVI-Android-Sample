@@ -5,9 +5,14 @@ import com.app.paypay.exchange.repositories.currencylayer.source.local.dao.Curre
 
 class LocalSource(private val currencyDao: CurrencyDao) {
 
-    fun addExchangeRates(sourceCurrency: String, quotes: LinkedHashMap<String, Double>): Boolean {
+    fun addExchangeRates(
+        sourceCurrency: String,
+        sourceAmount: Double,
+        quotes: LinkedHashMap<String, Double>
+    ): Boolean {
         val rates = quotes.map {
             ExchangeRate(
+                sourceAmount = sourceAmount,
                 sourceCurrency = sourceCurrency, destinationCurrency = it.key.substring(3),
                 exchangeRate = it.value
             )
@@ -15,6 +20,8 @@ class LocalSource(private val currencyDao: CurrencyDao) {
         return currencyDao.insertAll(rates).isNotEmpty()
     }
 
-    fun getExchangeRatesForSourceCurrency(sourceCurrency: String) =
-        currencyDao.getExchangeRatesForSourceCurrency(sourceCurrency)
+    fun getExchangeRatesForSourceCurrency(sourceCurrency: String, sourceAmount: Double) =
+        currencyDao.getExchangeRatesForSourceCurrency(sourceCurrency, sourceAmount)
+
+    fun deleteCachedExchangeRates() = currencyDao.deleteAll()
 }
