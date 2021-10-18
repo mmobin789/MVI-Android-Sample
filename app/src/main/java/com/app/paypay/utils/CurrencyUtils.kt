@@ -1,7 +1,7 @@
 package com.app.paypay.utils
 
 import android.content.Context
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException

@@ -1,9 +1,9 @@
-package com.app.paypay.exchange.repositories.currencylayer
+package com.app.paypay.exchange.repository.currencylayer
 
-import com.app.paypay.exchange.repositories.currencylayer.source.app.AssetSource
-import com.app.paypay.exchange.repositories.currencylayer.source.local.LocalSource
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
-import com.app.paypay.exchange.repositories.currencylayer.source.remote.RemoteSource
+import com.app.paypay.exchange.repository.currencylayer.source.app.AssetSource
+import com.app.paypay.exchange.repository.currencylayer.source.local.LocalSource
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.remote.RemoteSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.random.Random

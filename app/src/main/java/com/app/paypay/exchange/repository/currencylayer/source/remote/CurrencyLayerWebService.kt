@@ -1,6 +1,6 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.remote
+package com.app.paypay.exchange.repository.currencylayer.source.remote
 
-import com.app.paypay.exchange.repositories.currencylayer.source.remote.business.CurrencyLayerResponse
+import com.app.paypay.exchange.repository.currencylayer.source.remote.business.CurrencyLayerResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

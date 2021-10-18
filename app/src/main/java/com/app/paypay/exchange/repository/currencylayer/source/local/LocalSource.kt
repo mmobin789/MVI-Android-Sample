@@ -1,7 +1,7 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.local
+package com.app.paypay.exchange.repository.currencylayer.source.local
 
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
-import com.app.paypay.exchange.repositories.currencylayer.source.local.dao.CurrencyDao
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.local.dao.CurrencyDao
 
 class LocalSource(private val currencyDao: CurrencyDao) {
 

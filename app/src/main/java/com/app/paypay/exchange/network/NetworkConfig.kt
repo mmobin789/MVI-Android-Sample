@@ -1,6 +1,6 @@
 package com.app.paypay.exchange.network
 
-import com.app.paypay.exchange.repositories.currencylayer.source.remote.CurrencyLayerWebService
+import com.app.paypay.exchange.repository.currencylayer.source.remote.CurrencyLayerWebService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -1,9 +1,9 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.local.dao
+package com.app.paypay.exchange.repository.currencylayer.source.local.dao
 
 import androidx.room.Dao
 import androidx.room.Query
 import com.app.paypay.base.dao.BaseDao
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
 
 @Dao
 interface CurrencyDao : BaseDao<ExchangeRate> {

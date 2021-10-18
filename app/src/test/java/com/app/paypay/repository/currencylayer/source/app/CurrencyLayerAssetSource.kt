@@ -1,6 +1,6 @@
 package com.app.paypay.repository.currencylayer.source.app
 
-import com.app.paypay.exchange.repositories.currencylayer.source.app.AssetSource
+import com.app.paypay.exchange.repository.currencylayer.source.app.AssetSource
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert

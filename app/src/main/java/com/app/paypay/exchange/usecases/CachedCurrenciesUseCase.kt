@@ -1,6 +1,6 @@
 package com.app.paypay.exchange.usecases
 
-import com.app.paypay.exchange.repositories.currencylayer.CurrencyLayerServiceRepository
+import com.app.paypay.exchange.repository.currencylayer.CurrencyLayerServiceRepository
 import java.util.concurrent.TimeUnit
 
 class CachedCurrenciesUseCase(

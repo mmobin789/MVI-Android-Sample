@@ -1,4 +1,4 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.local.business
+package com.app.paypay.exchange.repository.currencylayer.source.local.business
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.paypay.R
-import com.app.paypay.exchange.repositories.currencylayer.CurrencyLayerServiceRepository
+import com.app.paypay.exchange.repository.currencylayer.CurrencyLayerServiceRepository
 import com.app.paypay.exchange.usecases.CachedCurrenciesUseCase
 import com.app.paypay.exchange.usecases.CurrencyServiceUseCase
 import com.app.paypay.exchange.usecases.GetCurrenciesViaAssetsUseCase

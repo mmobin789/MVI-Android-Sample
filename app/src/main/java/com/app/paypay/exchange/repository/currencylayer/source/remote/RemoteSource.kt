@@ -1,4 +1,4 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.remote
+package com.app.paypay.exchange.repository.currencylayer.source.remote
 
 class RemoteSource(private val currencyLayerWebService: CurrencyLayerWebService) {
 

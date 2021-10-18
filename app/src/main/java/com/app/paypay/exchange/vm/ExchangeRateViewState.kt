@@ -1,7 +1,7 @@
 package com.app.paypay.exchange.vm
 
 import androidx.annotation.StringRes
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
 
 sealed class ExchangeRateViewState {
     data class ExchangeRates(val sourceAmount: Double, val exchangeRates: List<ExchangeRate>) :

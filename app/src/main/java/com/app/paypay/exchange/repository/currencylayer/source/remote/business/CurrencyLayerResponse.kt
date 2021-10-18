@@ -1,4 +1,4 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.remote.business
+package com.app.paypay.exchange.repository.currencylayer.source.remote.business
 
 data class CurrencyLayerResponse(
     val success: Boolean = false,

@@ -1,4 +1,4 @@
-package com.app.paypay.exchange.repositories.currencylayer.source.app
+package com.app.paypay.exchange.repository.currencylayer.source.app
 
 import android.content.Context
 import com.app.paypay.utils.loadCurrenciesFromAssets

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.paypay.databinding.AdapterCurrenciesBinding
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
 import com.app.paypay.utils.getConvertedAmount
 
 class CurrenciesAdapter(private val list: List<ExchangeRate>) :

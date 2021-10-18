@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.app.paypay.database.AppDatabase
 import com.app.paypay.exchange.network.NetworkConfig
-import com.app.paypay.exchange.repositories.currencylayer.CurrencyLayerServiceRepository
-import com.app.paypay.exchange.repositories.currencylayer.source.app.AssetSource
-import com.app.paypay.exchange.repositories.currencylayer.source.local.LocalSource
-import com.app.paypay.exchange.repositories.currencylayer.source.remote.RemoteSource
+import com.app.paypay.exchange.repository.currencylayer.CurrencyLayerServiceRepository
+import com.app.paypay.exchange.repository.currencylayer.source.app.AssetSource
+import com.app.paypay.exchange.repository.currencylayer.source.local.LocalSource
+import com.app.paypay.exchange.repository.currencylayer.source.remote.RemoteSource
 import com.app.paypay.exchange.usecases.CachedCurrenciesUseCase
 import com.app.paypay.exchange.usecases.CurrencyServiceUseCase
 import com.app.paypay.exchange.usecases.GetCurrenciesViaAssetsUseCase

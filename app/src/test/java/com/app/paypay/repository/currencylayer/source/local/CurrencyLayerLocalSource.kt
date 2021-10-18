@@ -1,7 +1,7 @@
 package com.app.paypay.repository.currencylayer.source.local
 
-import com.app.paypay.exchange.repositories.currencylayer.source.local.LocalSource
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.source.local.LocalSource
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert

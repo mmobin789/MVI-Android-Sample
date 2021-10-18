@@ -2,8 +2,8 @@ package com.app.paypay.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.app.paypay.exchange.repositories.currencylayer.CurrencyLayerServiceRepository
-import com.app.paypay.exchange.repositories.currencylayer.source.local.business.ExchangeRate
+import com.app.paypay.exchange.repository.currencylayer.CurrencyLayerServiceRepository
+import com.app.paypay.exchange.repository.currencylayer.source.local.business.ExchangeRate
 import com.app.paypay.exchange.usecases.CachedCurrenciesUseCase
 import com.app.paypay.exchange.usecases.CurrencyServiceUseCase
 import com.app.paypay.exchange.usecases.GetCurrenciesViaAssetsUseCase
