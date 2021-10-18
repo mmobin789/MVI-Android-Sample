@@ -6,7 +6,6 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import com.app.paypay.R
 import com.app.paypay.databinding.ActivityExchangeRateBinding
 import com.app.paypay.exchange.di.DI
 import com.app.paypay.exchange.vm.ExchangeActivityViewModel

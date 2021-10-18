@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PayPay</string>
     <string name="enter_amount">Enter Amount</string>
-    <string name="enter_amount_msg">Enter an amount to convert 1st.</string>
+    <string name="enter_amount_msg">Enter a valid amount to convert 1st.</string>
     <string name="enter_currency_msg">Choose a currency to convert in.</string>
 </resources>

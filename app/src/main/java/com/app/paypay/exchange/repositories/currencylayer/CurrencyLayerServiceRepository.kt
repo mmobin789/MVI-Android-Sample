@@ -28,7 +28,9 @@ class CurrencyLayerServiceRepository(
                         else -> Payload.ExchangeRates.Fail("Failed to insert exchange rates in Database.")
                     }
                 } ?: run {
-                    // returns dummy rates here for calculation as they are not available in currency layer api.
+                    /* returns dummy rates here for calculation as they are not available in currency layer api.
+                     This has been handled non-ideally here as it's not a valid use case to save time and effort.
+                     */
                     val dummyExchangeRates =
                         assetSource.getCurrenciesFromAssets().map { destinationCurrency ->
                             ExchangeRate(
